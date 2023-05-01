@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,11 +20,40 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+.home-bgd {
+  width: 100%;
+  height: 100vh;
+  background-image: url("/journal-white.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 60%;
+  overflow-y: auto;
+  box-sizing: content-box;
+}
+
+.home-title {
+  color: #ffffff62;
+  border-color: #181d21bc;
+  -webkit-text-stroke: 4px #181d21;
+}
+
+.home-btn {
+  background: linear-gradient(to right, #dfd2bf 50%, #181d21 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  color: #dfd2bf;
+  border-color: #dfd2bf;
+  transition: background-position 0.5s, color 0.5s, border 0.5s;
+  transition-timing-function: ease-out;
+  @apply px-5 py-2 border inline-block;
+}
+
+.home-btn:hover {
+  border-color: #181d21;
+  background-position: left bottom;
+  color: #181d21;
 }
