@@ -9,3 +9,79 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Entry {
+  id             String  @id @default(uuid())
+  title          String
+  body           String?
+  has_attachment Boolean @default(false)
+  has_tags       Boolean @default(false)
+  //TODO: journal id foreign key
+}
+
+//TODO: figure out how to make multiple keys a primary key
+// model Tags {
+//   tag_name  String
+//   item_type ItemType
+//   // TODO: item id foreign key
+// }
+
+enum ItemType {
+  JOURNAL
+  ENTRY
+}
+
+model File {
+  id        String @id @default(uuid())
+  name      String
+  file_type String
+  blob      Bytes
+  //TODO: entry id foreign key
+}
+
+model Journal {
+  id           String    @id @default(uuid())
+  name         String
+  description  String?
+  is_deleted   Boolean   @default(false)
+  deleted_on   DateTime?
+  autosave     Boolean   @default(true)
+  has_lock     Boolean   @default(false)
+  password     String?
+  has_reminder Boolean   @default(false)
+  has_tags     Boolean   @default(false)
+  //TODO: owner id foreign key
+}
+
+model Reminder {
+  id            String       @id @default(uuid())
+  title         String
+  body          String
+  repeat        Repeat
+  // TODO: check if there is a better datatype for time
+  time          String
+  date          DateTime
+  end_date      DateTime?
+  is_active     Boolean      @default(true)
+  reminder_type ReminderType
+  //TODO: journal id foreign key
+}
+
+enum Repeat {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+enum ReminderType {
+  NOTIFICATION
+  EMAIL
+  BOTH
+}
+
+model User {
+  id        String @id @default(uuid())
+  full_name String
+  email     String @unique
+  password  String
+}
