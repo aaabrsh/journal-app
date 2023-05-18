@@ -1,3 +1,16 @@
 
-Todo:
-  ☐ List TODOs
+Journal App Tasks:
+  API: 
+    ✔ CRUD API for journal @20m @done(23-05-18 16:42)
+    ✔ CRUD API for entry  @20m @done(23-05-18 16:44)
+    ✔ CRUD API for User @20m @done(23-05-18 16:44)
+  UI:
+    ☐ add WYSIWYG @30m
+  DB:
+    ✔ migrate to supabase @10m @done(23-05-17 10:46)
+  DEVOPS:
+    ✔ create DB on supabase @10m @started(23-05-12 10:18) @done(23-05-12 10:19) @lasted(1m57s)
+    ✔ add keys to .env @5m @started(23-05-12 10:20) @done(23-05-12 10:28) @lasted(8m19s)
+
+Archive:
+  
