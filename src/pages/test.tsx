@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import dynamic from "next/dynamic";
+
 const CKEditor = dynamic(
   () => import("@ckeditor/ckeditor5-react").then((mod) => mod.CKEditor),
   {
@@ -10,14 +11,28 @@ const CKEditor = dynamic(
   }
 );
 
+const ReactQuill = dynamic(() => import("react-quill").then((mod) => mod), {
+  ssr: false,
+});
+
 export default function Index() {
   const [value, setValue] = useState("");
   const [value1, setValue1] = useState("");
 
   let [loaded, setLoaded] = useState(false);
+  let ClassicEditor = null;
 
   useEffect(() => {
-    setLoaded(true);
+    import("@ckeditor/ckeditor5-build-classic")
+      .then((CKEditor) => {
+        ClassicEditor = CKEditor.default;
+        setLoaded(true);
+        console.log("here", ClassicEditor ? "true" : "false");
+        // Use ClassicEditor here or set it as a component state
+      })
+      .catch((error) => {
+        console.error("Error loading CKEditor:", error);
+      });
   }, []); // run on mounting
 
   function handleChange(text: string) {
@@ -40,7 +55,7 @@ export default function Index() {
         // modules={}
       />
       <div>Second componenet</div>
-      {loaded ? (
+      {loaded && ClassicEditor ? (
         <CKEditor
           editor={ClassicEditor}
           data="<p>Hello from CKEditor 5!</p>"
